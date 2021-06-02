@@ -49,7 +49,7 @@ public class Movie implements Serializable {
     private String genreId;
 
     @Column
-    private String rating;
+    private Double rating;
     
     @Column
     private String imageUrl;

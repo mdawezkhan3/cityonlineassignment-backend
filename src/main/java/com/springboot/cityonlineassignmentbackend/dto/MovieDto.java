@@ -21,11 +21,11 @@ public class MovieDto {
 	private String genreName;
 	private String genreImageUrl;
 	private String genreId;
-	private String rating;
+	private Double rating;
 	private String imageUrl;
 	
 	public static List<MovieDto> valueOf(List<Movie> movies, List<Genre> genres) {
-        return movies.stream().map(m -> {
+		List<MovieDto> movieDtos = movies.stream().map(m -> {
         	MovieDto dto = new MovieDto();
         	dto.setId(m.getId());
         	dto.setGenreId(m.getGenreId());
@@ -39,6 +39,12 @@ public class MovieDto {
             dto.setImageUrl(m.getImageUrl());
             return dto;
         }).collect(Collectors.toList());
+		
+		movieDtos.sort((o1, o2)
+                -> o1.getRating().compareTo(
+                		o2.getRating()));
+		
+		return movieDtos;
     }
 	
 	public static MovieDto valueOf(Movie movie, Genre genre) {
